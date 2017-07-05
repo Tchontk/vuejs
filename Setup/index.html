@@ -32,23 +32,21 @@
         <button id="start-game" @click="startGame">START NEW GAME</button>
       </div>
     </section>
-    <section class="row controls" v-else="combat">
+    <section class="row controls" v-if="combat">
       <div class="small-12 columns">
-        <button id="attack" @click="attack">ATTACK</button>
-        <button id="special-attack" @click="specialAttack">SPECIAL ATTACK</button>
-        <button id="heal" @click="heal">HEAL</button>
+        <button id="attack" @click="attack('attack')">ATTACK</button>
+        <button id="special-attack" @click="attack('specialAttack')">SPECIAL ATTACK</button>
+        <button id="heal" @click="heal('heal')">HEAL</button>
         <button id="give-up" @click="giveUp">GIVE UP</button>
       </div>
     </section>
-    <section class="row log">
+    <section class="row log" v-if="combat">
       <div class="small-12 columns">
         <ul>
-          <li>
-
-          </li>
-        </ul>
-      </div>
-    </section>
+          <li v-for="(log, index) in logs" :class="{'player-turn': index%2==0, 'monster-turn': index%2!=0}">{{log}}</div>
+      </ul>
+  </div>
+  </section>
   </div>
 </body>
 <script src="vue.js"></script>
