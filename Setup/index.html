@@ -43,10 +43,10 @@
     <section class="row log" v-if="combat">
       <div class="small-12 columns">
         <ul>
-          <li v-for="(log, index) in logs" :class="{'player-turn': index%2==0, 'monster-turn': index%2!=0}">{{log}}</div>
-      </ul>
-  </div>
-  </section>
+          <li v-for="(log, index) in logs" :class="{'player-turn': index%2==0, 'monster-turn': index%2!=0}">{{log}}</li>
+        </ul>
+      </div>
+    </section>
   </div>
 </body>
 <script src="vue.js"></script>
