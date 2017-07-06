@@ -14,7 +14,7 @@
         <h1 class="text-center">YOU</h1>
         <div class="healthbar">
           <div :style="heroHealth" class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
-
+            {{players[0].health}}
           </div>
         </div>
       </div>
@@ -22,17 +22,17 @@
         <h1 class="text-center">MONSTER</h1>
         <div class="healthbar">
           <div :style="monsterHealth" class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
-
+            {{players[1].health}}
           </div>
         </div>
       </div>
     </section>
-    <section class="row controls" v-if="!combat">
+    <section class="row controls" v-if="!gameIsRunning">
       <div class="small-12 columns">
         <button id="start-game" @click="startGame">START NEW GAME</button>
       </div>
     </section>
-    <section class="row controls" v-if="combat">
+    <section class="row controls" v-if="gameIsRunning">
       <div class="small-12 columns">
         <button id="attack" @click="attack('attack')">ATTACK</button>
         <button id="special-attack" @click="attack('specialAttack')">SPECIAL ATTACK</button>
@@ -40,7 +40,7 @@
         <button id="give-up" @click="giveUp">GIVE UP</button>
       </div>
     </section>
-    <section class="row log" v-if="combat">
+    <section class="row log" v-if="gameIsRunning">
       <div class="small-12 columns">
         <ul>
           <li v-for="(log, index) in logs" :class="{'player-turn': index%2==0, 'monster-turn': index%2!=0}">{{log}}</li>

@@ -1,7 +1,7 @@
 new Vue({
   el: '#app',
   data: {
-    combat: false,
+    gameIsRunning: false,
     players: [{
       name: "HERO",
       health: 100,
@@ -12,17 +12,17 @@ new Vue({
       playerTarget: 1
     }, {
       name: "MONSTER",
-      health: 100,
-      healthInit: 100,
+      health: 200,
+      healthInit: 200,
       attack: [1, 5],
-      specialAttack: [10, 20],
-      heal: [5, 10],
+      specialAttack: [30, 40],
+      heal: [0, 0],
       playerTarget: 0
     }],
     logs: []
   },
   watch: {
-    combat: function () {
+    gameIsRunning: function () {
       if (this.players[0].health <= 0 || this.players[1].health <= 0) {
         (confirm('Restart ?') ? this.startGame() : null)
       }
@@ -54,7 +54,7 @@ new Vue({
         let idTarget = player.playerTarget
         this.players[idTarget].health = Math.max(this.players[idTarget].health - dmg, 0)
         this.logs.push(player.name + ' HITS ' + this.players[idTarget].name + ' FOR ' + dmg)
-        this.combat = (this.players[idTarget].health <= 0 ? false : true)
+        this.gameIsRunning = (this.players[idTarget].health <= 0 ? false : true)
       }, this);
     },
     heal: function (actionName) {
@@ -67,14 +67,14 @@ new Vue({
       }, this);
     },
     giveUp: function () {
-      this.combat = false
+      this.gameIsRunning = false
     },
     startGame: function () {
       this.logs = []
       this.players.forEach(function (player) {
         player.health = player.healthInit;
       }, this);
-      this.combat = true
+      this.gameIsRunning = true
     }
   }
 })
