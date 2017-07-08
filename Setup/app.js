@@ -6,16 +6,16 @@ new Vue({
       name: "HERO",
       health: 100,
       healthInit: 100,
-      attack: [1, 5],
-      specialAttack: [10, 20],
+      attack: [5, 12],
+      specialAttack: [30, 40],
       heal: [5, 10],
       playerTarget: 1
     }, {
       name: "MONSTER",
       health: 200,
       healthInit: 200,
-      attack: [1, 5],
-      specialAttack: [30, 40],
+      attack: [9, 15],
+      specialAttack: [0, 40],
       heal: [0, 0],
       playerTarget: 0
     }],
