@@ -1,7 +1,37 @@
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!DOCTYPE html>
+<html lang="en">
 
-<div id="app">
-  <h1 ref="heading">{{ title }}</h1>
-  <button v-on:click="show">Show Paragraph</button>
-  <p v-if="showParagraph">This is not always visible</p>
-</div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app1">
+    <h1 ref="heading">{{ title }}</h1>
+    <button v-on:click="show" ref="myButton">Show Paragraph</button>
+    <p v-if="showParagraph">This is not always visible</p>
+  </div>
+  <div id="app2">
+    <h1 ref="heading">{{ title }}</h1>
+    <button @click="onChange">Change View #1</button>
+    <hello></hello>
+    <hello></hello>
+  </div>
+  <div id="app3"></div>
+  <div id="app4">
+    <h1>{{title}}</h1>
+    <button @click="title = 'Changed'">Update Title</button>
+    <button @click="destroy">Destroy</button>
+  </div>
+
+
+  <script src="vue.js"></script>
+  <script src="app.js"></script>
+
+
+</body>
+
+</html>
