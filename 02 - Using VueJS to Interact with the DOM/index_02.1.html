@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="name">
+    <p>{{name}}</p>
+    <!-- Directives -->
+    <input type="text" v-on:input="changeTitle">
+    <h1 v-once>{{title}}</h1>
+    <p>{{title}} - <a v-bind:href="link">ggl</a></p>
+    <p>{{title}} - <a :href="link">ggl (:)</a></p>
+    <p>{{sayHello()}}</p>
+    <p v-html=finishedLink></p>
+    <p v-html="finishedLink"></p>
+    <!-- La même data -->
+    <button v-on:click="increase(2, $event)">Increase 2 func</button>
+    <button v-on:click="decrease">Deacrease 1 func</button>
+    <p>{{counter}}</p>
+    <p>{{counter >= 10 ? 'Greater than 10' : 'Smaller than 10'}}</p>
+    <p>{{result}}</p>
+    <button v-on:click="counter--">Deacrease 1 computed</button>
+    <button @click="counter++">Increase 1 computed (@)</button>
+    <button v-on:click="secondCounter++">Increase 1 Second(Method)</button>
+    <p>Result :{{result2()}} | {{output}} | {{secondCounter}}</p>
+    <p v-on:mousemove="updateCoordinates">
+      Coordinates: {{x}} / {{y}} -
+      <span v-on:mousemove="dummy">DEAD SPOT</span> -
+      <!-- Stop propagation -->
+      <span v-on:mousemove.stop="">DEAD SPOT #2</span>
+    </p>
+    <input type="text" v-on:keyup="alertMe">
+    <input type="text" v-on:keyup.enter.space.tab="alertMe">
+  </div>
+</body>
+<script src="vue.js"></script>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      name: 'Pierrick',
+      title: 'Hello world',
+      link: 'http://google.com',
+      finishedLink: '<a href="http://google.com">Google</a>',
+      counter: 0,
+      secondCounter: 0,
+      result: '-',
+      x: 0,
+      y: 0
+    },
+    watch: {
+      counter: function (value) {
+        console.log('counter Watch');
+        var vm = this; // !important
+        setTimeout(function () {
+          vm.counter = 0
+          console.log('counter Watch closure');
+        }, 2000);
+      }
+    },
+    computed: {
+      output: function () {
+        //console.log('Computed');
+        return this.counter > 5 ? 'Greater 5' : 'Smaller 5'
+      }
+    },
+    methods: {
+      result2() { // = result2: function()
+        //console.log('result2');
+        return this.counter > 5 ? 'Greater 5' : 'Smaller 5'
+      },
+      changeTitle: function (event) {
+        //console.log('changeTitle');
+        this.title = event.target.value;
+      },
+      sayHello: function () {
+        //console.log('sayHello');
+        //return 'Hello!'
+        return this.title
+      },
+      increase: function (step, event) {
+        //console.log('increase');
+        this.counter += step || 1
+        this.result = this.counter > 5 ? 'Sup 5' : 'Inf 5'
+      },
+      decrease: function () {
+        //console.log('decrease');
+        this.counter--;
+        this.result = this.counter > 5 ? 'Sup 5' : 'Inf 5'
+      },
+      updateCoordinates: function (event) {
+        //console.log('updateCoordinates');
+        this.x = event.clientX
+        this.y = event.clientY
+      },
+      dummy: function (event) {
+        //console.log('dummy');
+        event.stopPropagation();
+      },
+      alertMe: function () {
+        //console.log('alertMe');
+        alert('alert')
+      }
+    }
+  });
+</script>
+
+</html>
