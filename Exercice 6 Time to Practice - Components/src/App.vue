@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <app-header></app-header>
+    <appHeader></appHeader>
     <hr>
     <div class="row">
       <app-server-status-detail></app-server-status-detail>
-      <app-servers-status></app-servers-status>
+      <ServersStatus></ServersStatus>
     </div>
     <hr>
     <app-footer></app-footer>
@@ -19,9 +19,10 @@ import ServerStatusDetail from './components/Server/ServerStatusDetail.vue'
 
 export default {
   components: {
-    'app-header': Header,
-    'app-footer': Footer,
-    'app-servers-status': ServersStatus,
+    /* Utilisation (ou pas) du tiret */
+    appHeader: Header,
+    appFooter: Footer,
+    ServersStatus,
     'app-server-status-detail': ServerStatusDetail
   }
 
