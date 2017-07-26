@@ -13,3 +13,10 @@ export default {
 
 }
 </script>
+<style scoped>
+/* No scope */
+
+div {
+  border: 1px solid red
+}
+</style>
