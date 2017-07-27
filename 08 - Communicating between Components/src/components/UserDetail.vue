@@ -5,6 +5,7 @@
     <p>User Name : {{ myName }}</p>
     <p>User Name Reverse : {{ switchName() }}</p>
     <button @click="resetName">Reset Name</button>
+    <button @click="resetFn">Reset Name</button>
   </div>
 </template>
 
@@ -17,7 +18,8 @@ export default {
       type: String,
       required: true
       //default: "Hello"
-    }
+    },
+    resetFn: Function
   },
   methods: {
     switchName() {
