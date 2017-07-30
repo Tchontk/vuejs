@@ -14,6 +14,12 @@ export default {
   },
   destroyed() {
     console.log('Destoyed');
+  },
+  deactivated() {
+    console.log('Deactivated');
+  },
+  activated() {
+    console.log('Activated');
   }
 }
 </script>
