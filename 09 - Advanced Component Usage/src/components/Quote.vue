@@ -2,10 +2,13 @@
   <div>
     <div class="title">
       <slot name="title"></slot>
+      <span class="subtitle">
+        <slot name="subtitle">The subtitle</slot>
+      </span>
     </div>
     <hr>
     <div>
-      <slot name="quote"></slot>
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -27,6 +30,10 @@ div {
 
 h2 {
   color: red;
+}
+
+.subtitle {
+  color: #ccc
 }
 
 .title {
