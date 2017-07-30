@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-export const eventBus = new Vue({
+export const serverBus = new Vue({
   methods: {
-    checkServerStatus(server) {
-      this.$emit('changeServer', server)
+    serverSelected(server) {
+      this.$emit('serverSelectedMessage', server)
+    },
+    serverReset(server) {
+      this.$emit('serverResetMessage')
     }
   }
 });

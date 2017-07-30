@@ -22,7 +22,7 @@ export default {
     appHeader: Header,
     Servers,
     'app-server-details': ServerDetails,
-    'app-footer': Footer
+    'app-footer': Footer,
   }
 }
 </script>

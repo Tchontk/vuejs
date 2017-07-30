@@ -1,23 +1,21 @@
 <template>
   <div class="col-xs-12 col-sm-6">
     <ul class="list-group">
-      <li class="list-group-item" v-for="server in servers">
-        Server #{{ server.id }}
-        <button @click="checkServer(server)">Check Status</button>
-      </li>
+      <app-server v-for="server in servers" :server="server">!</app-server>
     </ul>
+    <hr>
+    <button @click="resetStatus">Reset</button>
   </div>
 </template>
 
 <script>
 
-import { eventBus } from '../../main';
+import Server from './Server.vue';
+import { serverBus } from '../../main';
+
 export default {
-  methods: {
-    checkServer(server) {
-      console.log(server);
-      eventBus.checkServerStatus(server)
-    }
+  components: {
+    'app-server': Server,
   },
   data: function () {
     return {
@@ -28,9 +26,13 @@ export default {
         { id: 4, status: 'Normal' }
       ]
     }
+  },
+  methods: {
+    resetStatus() {
+      serverBus.serverReset()
+    }
   }
 }
-
 </script> 
 
 <style>

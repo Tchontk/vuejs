@@ -1,22 +1,31 @@
 <template>
   <div class="col-xs-12 col-sm-6">
-    <p>{{status}}</p>
+    <p v-if="!server">Server Details are currently not updated</p>
+    <p v-else>Server # {{server.id}} status : {{server.status}}</p>
+    <hr>
+    <button @click="goToNormal">Go To Normal</button>
   </div>
 </template>
 
 <script>
 
-import { eventBus } from '../../main';
+import { serverBus } from '../../main';
 
 export default {
   data: function () {
     return {
-      status: 'Server Details are currently not updated'
+      server: null
+    }
+  },
+  methods: {
+    goToNormal() {
+      this.server.status = 'Normal'
     }
   },
   created() {
-    eventBus.$on('changeServer', (server) => { this.status = 'Server #' + server.id + ' status : ' + server.status }
-    )
+    serverBus.$on('serverSelectedMessage', (server) => { this.server = server }
+    ),
+      serverBus.$on('serverResetMessage', () => (this.server = null))
   }
 }
 </script>
