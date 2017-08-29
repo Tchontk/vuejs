@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     saveQuote(quoteMax, quotes) {
-      quoteBus.editQuotes(this.message)
+      (this.message != '' ? quoteBus.editQuotes(this.message) : null)
       this.message = ''
     }
   }
