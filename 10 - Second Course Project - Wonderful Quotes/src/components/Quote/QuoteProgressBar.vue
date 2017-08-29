@@ -1,7 +1,7 @@
 <template>
   <div class="progress">
-    <div :style="styleProgressBar" class="progress-bar" style="width:70%">
-      {{pcentProgress}} {{quotes}}
+    <div :style="styleProgressBar" class="progress-bar" style="width:70%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" role="progressbar">
+      {{quoteCount}}/{{quoteMax}}
     </div>
   </div>
 </template>
@@ -9,24 +9,14 @@
 <script>
 import { quoteBus } from '../../main';
 export default {
+  props: ['quoteCount', 'quoteMax'],
   computed: {
-    styleProgressBar: function () {
+    styleProgressBar: function() {
       console.log('watch');
       return {
-        width: this.pcentProgress + '%',
+        width: (this.quoteCount / this.quoteMax) * 100 + '%',
         backgroundColor: "blue",
       }
-    }
-  },
-  //props: ['quotes'],
-  created() {
-    console.log('On editQuote');
-    quoteBus.$on('editQuotes', (quotes) => { this.pcentProgress = (quotes.length * 100) / 10; })
-    quoteBus.$on('deleteQuote', (index) => { this.pcentProgress - 10 })
-  },
-  data: function () {
-    return {
-      pcentProgress: 3 * 10
     }
   }
 }

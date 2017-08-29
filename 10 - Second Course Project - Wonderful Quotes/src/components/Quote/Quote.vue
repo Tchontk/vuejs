@@ -1,21 +1,25 @@
 <template>
-  <div @click="deleteQuote(index)" class="row">
-    {{quote}} {{index}}</div>
+  <div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="panel panel-default">
+      <div class="quote panel-body">
+        <slot></slot>
+      </div>
+    </div>
+  </div>
 </template>
 
-<script>
-import { quoteBus } from '../../main';
-export default {
-  props: ['quote', 'index'],
-  methods: {
-    deleteQuote(index) {
-      console.log('deleteQuote');
-      quoteBus.deleteQuote(index)
-    }
-  }
-}
-</script>
-
 <style>
+.panel-body {
+  font-family: 'Arizonia', cursive;
+  font-size: 24px;
+  color: #6e6e6e
+}
 
+.quote {
+  cursor: pointer;
+}
+
+.quote:hover {
+  background-color: #ffe2e2;
+}
 </style>

@@ -1,6 +1,7 @@
 <template>
-  <div class="container">
-    <app-quote v-for="(quote, index) in quotes" :quote="quote" :index="index">!</app-quote>
+  <div class="row">
+    <app-quote v-for="(quote, index) in quotes" @click.native="deleteQuote(index)">{{quote}}</app-quote>
+    <!-- A utiliser avec <slot>-->
   </div>
 </template>
 
@@ -8,13 +9,15 @@
 import Quote from './Quote.vue'
 import { quoteBus } from '../../main';
 export default {
+  props: ['quotes'],
   components: {
     'app-quote': Quote,
   },
-  created() {
-    quoteBus.$on('deleteQuote', (index) => { this.quotes.splice(index - 1, 1) })
-  },
-  props: ['quotes']
+  methods: {
+    deleteQuote(index) {
+      quoteBus.deleteQuote(index)
+    }
+  }
 }
 </script>
 

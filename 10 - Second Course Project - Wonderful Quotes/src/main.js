@@ -4,8 +4,8 @@ import App from './App.vue'
 
 export const quoteBus = new Vue({
   methods: {
-    editQuotes(quotes) {
-      this.$emit('editQuotes', quotes)
+    editQuotes(message) {
+      this.$emit('editQuotes', message)
     },
     deleteQuote() {
       this.$emit('deleteQuote')
