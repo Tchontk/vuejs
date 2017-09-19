@@ -3,23 +3,19 @@
     <form v-if="!isSubmited">
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-          <div class="form-group">
-            <label for="firstname">First Name</label>
-            <input type="text" id="firstname" class="form-control" v-model="userData.firstName">
-          </div>
-          <div class="form-group">
-            <label for="lastname">Last Name</label>
-            <input type="text" id="lastname" class="form-control" v-model="userData.lastName">
-          </div>
+          <app-full-name v-model="fullName"></app-full-name>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" class="form-control" v-model="userData.email">
+            <input type="email" id="email" class="form-control" v-model="email">
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" class="form-control" v-model.lazy="userData.password">
+            <input type="password" id="password" class="form-control" v-model.lazy="password">
           </div>
-          <app-switch v-model="storeData"></app-switch>
+          <div class="form-group">
+            <label for=""><input type="radio" value="true" v-model="storeData">Yes</label>
+            <label for=""><input type="radio" value="false" v-model="storeData">No</label>
+          </div>
           <button class="btn btn-primary" @click.prevent="submited">Submit!</button>
           <!-- Exercise 3 -->
           <!-- Edit the Example from above and create a custom "Full Name" Control -->
@@ -35,9 +31,9 @@
             <h4>Your Data</h4>
           </div>
           <div class="panel-body">
-            <p>Full Name: {{userData.firstName}} {{userData.lastName}}</p>
-            <p>Mail: {{userData.email}}</p>
-            <p>Password: {{userData.password}}</p>
+            <p>Full Name: {{fullName}}</p>
+            <p>Mail: {{email}}</p>
+            <p>Password: {{password}}</p>
             <p>Store in Database?: {{storeData}}</p>
           </div>
         </div>
@@ -47,16 +43,13 @@
 </template>
 
 <script>
-import Switch from './Switch.vue';
+import FullName from './FullName.vue';
 export default {
   data() {
     return {
-      userData: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-      },
+      fullName: 'Pierrick Le Duc',
+      email: '',
+      password: '',
       storeData: true,
       isSubmited: false
     }
@@ -67,7 +60,7 @@ export default {
     }
   },
   components: {
-    'app-switch': Switch
+    'app-full-name': FullName
   }
 }
 </script>
