@@ -9,14 +9,53 @@
             <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                 <h1>Custom Directives</h1>
                 <!-- red = value // background = argument -->
-                <p v-highlight:background="'red'">Color this</p>
+                <p v-highlight:background.delayed.another="'red'">Color this</p>
+                <p v-local-highlight:background.delayed.blink="{mainColor:'red', secondColor:'green'}">Color this</p>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+  directives: {
+    "local-highlight": {
+      bind(element, binding, vnode) {
+        //element.style.backgroundColor = 'green';
+        //element.style.backgroundColor = binding.value;
+        var delay = 0;
+        if (binding.modifiers["delayed"]) {
+          delay = 6000;
+        }
+        if (binding.modifiers["blink"]) {
+          let mainColor = binding.value.mainColor;
+          let secondColor = binding.value.secondColor;
+          let currentColor = mainColor;
+          setTimeout(() => {
+            setInterval(() => {
+              currentColor === secondColor
+                ? (currentColor = mainColor)
+                : (currentColor = secondColor);
+              if (binding.arg === "background") {
+                element.style.backgroundColor = currentColor;
+              } else {
+                element.style.color = currentColor;
+              }
+            }, 1000);
+          }, delay);
+        } else {
+          setTimeout(() => {
+            if (binding.arg === "background") {
+              element.style.backgroundColor = binding.value;
+            } else {
+              element.style.color = binding.value;
+            }
+          }, delay);
+        }
+      }
+    }
+  }
+};
 </script>
 
 <style>
