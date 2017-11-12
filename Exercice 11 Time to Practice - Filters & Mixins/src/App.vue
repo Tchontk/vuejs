@@ -10,17 +10,17 @@
         <!-- Exercise 2 -->
         <!-- Build a global Filter which counts the length of a word and it appends it -->
         <!-- Like this: "Test" => Gets Filtered to => "Test (4)" -->
-        <p>II : {{message | messageLength}}</p>
+        <p>II : {{message | calculateLength}}</p>
 
         <!-- Exercise 3 -->
         <!-- Do the same as in Exercises 1 & 2, now with Computed Properties -->
         <p>III : {{reversedMessage}}</p>
-        <p>III : {{countMessageLength}}</p>
+        <p>III : {{countCalculateLength}}</p>
 
         <!-- Exercise 4 -->
         <!-- Share the Computed Property rebuilding Exercise 2 via a Mixin -->
         <p>IV : {{reversedMessageMixin}}</p>
-        <p>IV : {{countMessageLengthMixin}}</p>
+        <p>IV : {{countCalculateLengthMixin}}</p>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@ export default {
         .reverse()
         .join("");
     },
-    countMessageLength() {
+    countCalculateLength() {
       return this.message + " {" + this.message.length + "}";
     }
   }

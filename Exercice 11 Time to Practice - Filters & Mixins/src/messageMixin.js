@@ -1,7 +1,7 @@
 export const messageMixin = {
   data() {
     return {
-      messageMixin: "Hello"
+      messageMixin: "Hello V2"
     };
   },
   computed: {
@@ -11,7 +11,7 @@ export const messageMixin = {
         .reverse()
         .join("");
     },
-    countMessageLengthMixin() {
+    countCalculateLengthMixin() {
       return this.messageMixin + " {" + this.messageMixin.length + "}";
     }
   }
