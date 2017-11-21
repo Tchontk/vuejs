@@ -18,7 +18,6 @@
 <script>
 import List from "./List.vue";
 import { fruitMixin } from "./fruitMixin";
-
 export default {
   mixins: [fruitMixin],
   data() {
