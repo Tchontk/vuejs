@@ -1,11 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 
-Vue.filter('to-lowercase', function (value) {
-  return value.toLowerCase();
-});
-
-Vue.filter('messageLength', function (value) {
+Vue.filter('calculateLength', function (value) {
   return value + ' {' + value.length + '}';
 });
 
