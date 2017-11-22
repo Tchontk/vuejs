@@ -28,7 +28,13 @@
         <button class="btn btn-primary" @click="load= !load"> Load / Remove Element</button>
         <br><br>
         <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter" @enter-cancelled="enterCancelled" @before-leave="beforeLeave" @leave="leave" @after-leave="afterLeave" @leave-cancelled="leaveCancelled" :css="false">
-          <div style="width: 100px; height: 100px; background-color: lightgreen" v-if="load"></div>
+          <div style="width: 300px; height: 100px; background-color: lightgreen" v-if="load"></div>
+        </transition>
+        <hr>
+        <button class="btn btn-primary" @click="selectedComponent = (selectedComponent == 'app-success-alert' ? 'app-danger-alert' : 'app-success-alert')"> Load / Remove Element</button>
+        <br><br>
+        <transition name="fade" mode="in-out">
+          <component :is=" selectedComponent "></component>
         </transition>
       </div>
     </div>
@@ -36,21 +42,39 @@
 </template>
 
 <script>
+import DangerAlert from "./DangerAlert.vue";
+import SuccessAlert from "./SuccessAlert.vue";
 export default {
+  components: {
+    appDangerAlert: DangerAlert,
+    appSuccessAlert: SuccessAlert
+  },
   data() {
     return {
       show: true,
       alertAnimation: "fade",
-      load: true
+      load: true,
+      elementWidth: 100,
+      selectedComponent: "app-success-alert"
     };
   },
   methods: {
     beforeEnter(el) {
       console.log("beforeEnter");
+      this.elementWidth = 100;
+      el.style.width = this.elementWidth + "px";
     },
     enter(el, done) {
       console.log("enter");
-      done();
+      let round = 1;
+      const interval = setInterval(() => {
+        el.style.width = this.elementWidth + round * 10 + "px";
+        round++;
+        if (round > 20) {
+          clearInterval(interval);
+          done();
+        }
+      }, 20);
     },
     afterEnter(el) {
       console.log("afterEnter");
@@ -60,10 +84,21 @@ export default {
     },
     beforeLeave(el) {
       console.log("beforeLeave");
+      this.elementWidth = 300;
+      el.style.width = this.elementWidth + "px";
     },
     leave(el, done) {
       console.log("leave");
-      done();
+      console.log("enter");
+      let round = 1;
+      const interval = setInterval(() => {
+        el.style.width = this.elementWidth - round * 10 + "px";
+        round++;
+        if (round > 20) {
+          clearInterval(interval);
+          done();
+        }
+      }, 20);
     },
     afterLeave(el) {
       console.log("afterLeave");
