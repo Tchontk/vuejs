@@ -10,26 +10,37 @@ export const routes = [{
     //component: Home,
     name: 'home',
     components: {
-        default: Home,
-        'header-top': Header,
-        'header-bottom': ''
+      default: Home,
+      'header-top': Header,
+      'header-bottom': ''
     }
-}, {
+  }, {
     path: '/user',
     //component: User,
     components: {
-        default: User,
-        'header-bottom': Header
+      default: User,
+      'header-bottom': Header
     },
     children: [{
-        path: '',
-        component: UserStart
+      path: '',
+      component: UserStart
     }, {
-        path: ':id',
-        component: UserDetail
+      path: ':id',
+      component: UserDetail
     }, {
-        path: ':id/edit',
-        component: UserEdit,
-        name: 'userEdit'
+      path: ':id/edit',
+      component: UserEdit,
+      name: 'userEdit'
     }]
-}];
+  },
+  {
+    path: '/redirect-me',
+    redirect: {
+      name: 'home'
+    }
+  },
+  {
+    path: '*',
+    redirect: '/'
+  }
+];

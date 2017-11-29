@@ -4,5 +4,20 @@
     <p> User loaded has ID : {{$route.params.id}}</p>
     <router-link class="btn btn-primary" tag="button" :to="'/user/'+$route.params.id+'/edit'">Edit User V1</router-link>
     <router-link class="btn btn-primary" tag="button" :to="{name:'userEdit', params: {id : $route.params.id}, query: {locale:'en', q:100}}">Edit User V2</router-link>
+    <router-link class="btn btn-primary" tag="button" :to="link">Edit User V3</router-link>
   </div>
 </template> 
+
+<script>
+export default {
+  data() {
+    return {
+      link: {
+        name: "userEdit",
+        params: { id: $route.params.id },
+        query: { locale: "en", q: 100 }
+      }
+    };
+  }
+};
+</script>
