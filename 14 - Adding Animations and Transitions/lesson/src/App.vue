@@ -69,6 +69,7 @@ export default {
   },
   methods: {
     beforeEnter(el) {
+      console.log("test");
       console.log("beforeEnter");
       this.elementWidth = 100;
       el.style.width = this.elementWidth + "px";
