@@ -26,6 +26,12 @@ const router = new VueRouter({
         };
     }
 })
+router.beforeEach((to, from, next) => {
+    console.log('Global before');
+    console.log(to);
+    console.log(from);
+    next()
+})
 
 new Vue({
     el: '#app',

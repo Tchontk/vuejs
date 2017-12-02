@@ -6,41 +6,45 @@ import Home from './components/Home.vue';
 import Header from './components/Header.vue';
 
 export const routes = [{
-    path: '',
-    //component: Home,
-    name: 'home',
-    components: {
-      default: Home,
-      'header-top': Header,
-      'header-bottom': ''
-    }
-  }, {
-    path: '/user',
-    //component: User,
-    components: {
-      default: User,
-      'header-bottom': Header
+        path: '',
+        //component: Home,
+        name: 'home',
+        components: {
+            default: Home,
+            'header-top': Header,
+            'header-bottom': ''
+        }
+    }, {
+        path: '/user',
+        //component: User,
+        components: {
+            default: User,
+            'header-bottom': Header
+        },
+        children: [{
+            path: '',
+            component: UserStart
+        }, {
+            path: ':id',
+            component: UserDetail,
+            beforeEnter: (to, from, next) => {
+                console.log('Inside route setup');
+                next();
+            }
+        }, {
+            path: ':id/edit',
+            component: UserEdit,
+            name: 'userEdit'
+        }]
     },
-    children: [{
-      path: '',
-      component: UserStart
-    }, {
-      path: ':id',
-      component: UserDetail
-    }, {
-      path: ':id/edit',
-      component: UserEdit,
-      name: 'userEdit'
-    }]
-  },
-  {
-    path: '/redirect-me',
-    redirect: {
-      name: 'home'
+    {
+        path: '/redirect-me',
+        redirect: {
+            name: 'home'
+        }
+    },
+    {
+        path: '*',
+        redirect: '/'
     }
-  },
-  {
-    path: '*',
-    redirect: '/'
-  }
 ];

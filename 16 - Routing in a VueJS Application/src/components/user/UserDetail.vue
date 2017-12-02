@@ -19,6 +19,19 @@ export default {
         hash: "#data"
       }
     };
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log("beforeRouterEnter");
+    //  La data n'est pas accessible avant le next() !
+    /*next(vm => {
+      // Function de callBack
+      vm.link;
+    });*/
+    if (true) {
+      next();
+    } else {
+      next(false);
+    }
   }
 };
 </script>
