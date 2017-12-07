@@ -1,12 +1,18 @@
 <template>
   <div>
-    <div class="col-sm-6 col-md-4 col-lg-3">
-      <div class="panel panel-default">
-        <div class="quote panel-body">
-          {{item.brand}}{{item.price}}
+    <form>
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="panel panel-default">
+          <div class="quote panel-body">
+            {{item.brand}} (price : {{item.price}})
+            <br><br>
+            <input type="text" id="quantity" class="form-control" placeholder="Quantity">
+            <br><br>
+            <button class="btn btn-primary" @click.prevent="submited">Buy</button>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 

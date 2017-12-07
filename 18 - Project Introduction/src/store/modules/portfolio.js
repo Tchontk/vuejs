@@ -1,5 +1,9 @@
 const state = {
-    portfolio: []
+    portfolio: [{
+        brand: 'BMW',
+        price: 0,
+        quantity: 0
+    }]
 }
 
 const getters = {
