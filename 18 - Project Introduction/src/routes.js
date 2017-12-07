@@ -17,12 +17,14 @@ export const routes = [{
         default: Stock,
         components: {
             default: Stock,
+            'header-top': Header,
         }
     }, {
         path: '/portfolio',
         default: Portfolio,
         components: {
             default: Portfolio,
+            'header-top': Header,
         }
     },
     {
