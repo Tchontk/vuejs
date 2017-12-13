@@ -8,17 +8,21 @@ export const store = new Vuex.Store({
     state: {
         funds: 10000,
         items: [{
+            id: 12,
             brand: 'BMW',
-            price: 0
+            price: 153
         }, {
+            id: 34,
             brand: 'Google',
-            price: 0
+            price: 412
         }, {
+            id: 56,
             brand: 'Apple',
-            price: 0
+            price: 41
         }, {
+            id: 78,
             brand: 'Twitter',
-            price: 0
+            price: 496
         }]
     },
     getters: {
