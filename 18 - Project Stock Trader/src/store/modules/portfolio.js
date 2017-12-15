@@ -14,10 +14,12 @@ const getters = {
 
 const mutations = {
     sell: (state, payload) => {
+        console.log(state);
+        console.log(payload);
         state.counter += payload
     },
     buy: (state, payload) => {
-        state.counter += payload
+        state.portfolio.push(payload)
     }
 }
 
@@ -30,6 +32,7 @@ const actions = {
     buy: ({
         commit
     }, payload) => {
+        console.log(payload);
         commit('buy', payload)
     }
 }
