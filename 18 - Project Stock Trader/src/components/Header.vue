@@ -34,7 +34,7 @@
                 </li>
               </ul>
             </li>
-            <p class="navbar-text">Funds: $8.00</p>
+            <p class="navbar-text">Funds: {{fundsString}}$</p>
           </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -45,7 +45,10 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  computed: mapGetters(["fundsString"])
+};
 </script>
 
 <style>

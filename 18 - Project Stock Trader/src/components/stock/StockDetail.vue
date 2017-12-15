@@ -6,7 +6,7 @@
           <div class="quote panel-body">
             {{item.brand}} (price : {{item.price}})
             <br><br>
-            <input type="text" id="quantity" class="form-control" placeholder="Quantity" v-model="quantity">
+            <input type="text" id="quantity" class="form-control" placeholder="Quantity" v-model.number="quantity">
             <br><br>
             <button class="btn btn-primary" @click.prevent="buy({brand : item.brand, quantity: quantity, price:item.price})">Buy</button>
           </div>
@@ -20,11 +20,6 @@
 import { mapActions } from "vuex";
 export default {
   props: ["item"],
-  data() {
-    return {
-      quantity: undefined
-    };
-  },
   methods: {
     ...mapActions(["buy"])
   }
