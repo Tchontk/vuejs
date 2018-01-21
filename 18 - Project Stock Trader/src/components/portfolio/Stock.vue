@@ -4,7 +4,7 @@
       <div class="col-sm-6 col-md-6 col-lg-6">
         <div class="panel panel-default">
           <div class="quote panel-body">
-            {{item.brand}} (price : {{item.price}} | Quantity {{item.quantity}})
+            {{ item.brand }} (price : {{ item.price }} | Quantity {{ item.quantity }})
             <br><br>
             <input type="text" id="quantity" class="form-control" placeholder="Quantity">
             <br><br>
