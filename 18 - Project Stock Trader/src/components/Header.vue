@@ -4,9 +4,14 @@
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
+<<<<<<< HEAD
           <router-link to="/" class="navbar-brand">Stock Trader</router-link>
+=======
+          <router-link to="/">
+            <a class="navbar-brand">Stock Trader</a>
+          </router-link>
+>>>>>>> ec01faae57aeb50bb764bdd61226805104a5c684
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
@@ -23,7 +28,7 @@
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save & Load
-                <span class="caret"></span>
+                <span class="caret" />
               </a>
               <ul class="dropdown-menu">
                 <li>

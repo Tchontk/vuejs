@@ -1,19 +1,19 @@
 <template>
   <div>
     <ul class="list-group">
-      <app-stock v-for="(item, index) in portfolio" :key="index" :item="item" />
+      <app-stock v-for="(item) in items" :key="item.id" :item="item" />
     </ul>
   </div>
 </template>
 
-<script> 
+<script>
 import { mapGetters } from "vuex";
 import Stock from "./Stock.vue";
 export default {
   components: {
     appStock: Stock
   },
-  computed: mapGetters(["portfolio"])
+  computed: mapGetters(["items"])
 };
 </script>
 
