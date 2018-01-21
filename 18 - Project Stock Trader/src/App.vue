@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="container">
     <router-view name="header-top"></router-view>
     <transition name="slide" mode="out-in">
@@ -12,5 +12,7 @@ export default {};
 </script>
 
 <style>
-
+body {
+  padding: 30px;
+}
 </style>
