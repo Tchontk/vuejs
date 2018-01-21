@@ -6,7 +6,6 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        funds: 10000,
         items: [{
             id: 12,
             brand: 'BMW',
