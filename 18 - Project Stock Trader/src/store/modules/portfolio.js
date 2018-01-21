@@ -29,11 +29,10 @@ const mutations = {
             payload.brand);
         if (foundIndex === -1) {
             state.portfolio.push(payload)
-            state.funds -= payload.quantity * payload.price
         } else {
             state.portfolio[foundIndex].quantity += payload.quantity
-            state.funds -= payload.quantity * payload.price
         }
+        state.funds -= payload.quantity * payload.price
     }
 }
 
