@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script> 
+<script>
 import { mapGetters } from "vuex";
 import Stock from "./Stock.vue";
 export default {

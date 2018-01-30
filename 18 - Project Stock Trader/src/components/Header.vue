@@ -4,13 +4,9 @@
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-<<<<<<< HEAD
-          <router-link to="/" class="navbar-brand">Stock Trader</router-link>
-=======
           <router-link to="/">
             <a class="navbar-brand">Stock Trader</a>
           </router-link>
->>>>>>> ec01faae57aeb50bb764bdd61226805104a5c684
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -39,7 +35,7 @@
                 </li>
               </ul>
             </li>
-            <p class="navbar-text">Funds: {{fundsString}}$</p>
+            <p class="navbar-text">Funds: {{ portfolio.funds }}$</p>
           </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -52,7 +48,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  computed: mapGetters(["fundsString"])
+  computed: mapGetters(["portfolio"])
 };
 </script>
 

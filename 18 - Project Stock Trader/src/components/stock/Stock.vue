@@ -3,12 +3,18 @@
     <form>
       <div class="col-sm-6 col-md-6 col-lg-6">
         <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3>{{ stock.brand }}
+              <small>(price : {{ stock.price }})</small>
+            </h3>
+          </div>
           <div class="quote panel-body">
-            {{ item.brand }} (price : {{ item.price }})
-            <br><br>
-            <input type="text" id="quantity" class="form-control" placeholder="Quantity" v-model="quantity">
-            <br><br>
-            <button class="btn btn-primary" @click.prevent="buy({brand : item.brand, quantity: quantity, price:item.price})">Buy</button>
+            <div class="pull-left">
+              <input type="number" id="quantity" class="form-control" placeholder="Quantity" v-model="quantity">
+            </div>
+            <div class="pull-right">
+              <button class="btn btn-succes" :disabled="disableButton" @click.prevent="buyStock()">Buy</button>
+            </div>
           </div>
         </div>
       </div>
@@ -19,14 +25,29 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  props: ["item"],
+  props: ["stock"],
   data() {
     return {
-      quantity: undefined
+      quantity: -1
     };
   },
+  computed: {
+    disableButton: function() {
+      let quantity = parseFloat(this.quantity);
+      return quantity <= 0 || !Number.isInteger(quantity);
+    }
+  },
   methods: {
-    ...mapActions(["buy"])
+    ...mapActions(["buy"]),
+    buyStock() {
+      const order = {
+        stockId: this.stock.id,
+        stockPrice: this.stock.price,
+        quantity: this.quantity
+      };
+      this.buy(order);
+      this.quantity = 0;
+    }
   }
 };
 </script>

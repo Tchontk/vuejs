@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="list-group">
-      <app-stock v-for="(item) in items" :key="item.id" :item="item" />
+      <app-stock v-for="(stock) in stocks" :key="stock.id" :stock="stock" />
     </ul>
   </div>
 </template>
@@ -13,7 +13,7 @@ export default {
   components: {
     appStock: Stock
   },
-  computed: mapGetters(["items"])
+  computed: mapGetters(["stocks"])
 };
 </script>
 

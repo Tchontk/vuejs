@@ -1,4 +1,4 @@
- <template>
+<template>
   <div class="container">
     <router-view name="header-top" />
     <transition name="slide" mode="out-in">
@@ -11,7 +11,7 @@
 export default {
   data() {
     return {
-      items: [],
+      stocks: [],
       portfolio: []
     };
   },
@@ -19,7 +19,7 @@ export default {
     created() {
       const customActions = {
         savePortfolion: { method: "POST", url: "portfolio.json" },
-        getItems: { method: "GET", url: "items.json" }
+        getStocks: { method: "GET", url: "stocks.json" }
       };
       this.resource = this.$resource("{node}.json", {}, customActions);
     }
