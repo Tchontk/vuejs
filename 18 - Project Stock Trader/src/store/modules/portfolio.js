@@ -1,3 +1,26 @@
+const state = {
+  funds: 1000,
+  stocks: []
+}
+
+const getters = {
+  stockPortfolio: (state, getters) => {
+    return state.stocks.map(stock => {
+      const record = getters.stocks.find(element => element.id == stock.id)
+      return {
+        id: stock.id,
+        quantity: stock.quantity,
+        name: record.name,
+        price: record.price,
+      }
+    })
+  },
+  fundsString: state => {
+    let val = (state.funds / 1).toFixed(2).replace('.', ',')
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+  }
+}
+
 const mutations = {
   'BUY_STOCK': (state, { stockId, quantity, stockPrice }) => {
     const record = state.stocks.find(element => element.id === stockId)
@@ -25,22 +48,4 @@ const actions = {
   },
 }
 
-const getters = {
-  stockPortfolio: (state, getters) => {
-    return state.stocks.map(stock => {
-      const record = getters.stocks.find(element => element.id == stock.id)
-      return {
-        id: stock.id,
-        quantity: stock.quantity,
-        name: record.name,
-        price: record.price,
-      }
-    })
-  },
-  fundsString: state => {
-    let val = (state.funds / 1).toFixed(2).replace('.', ',')
-    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-  }
-}
-
-export default { getters, mutations, actions }
+export default { state, getters, mutations, actions }

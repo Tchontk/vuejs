@@ -13,7 +13,7 @@ export default {
   components: {
     appStock: Stock
   },
-  computed: mapGetters(["portfolio"])
+  computed: { ...mapGetters(["stockPortfolio"]) }
 };
 </script>
 
