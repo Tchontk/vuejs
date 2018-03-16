@@ -25,11 +25,15 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  props: ["stock"],
+  props: {
+    stock: {
+      type: Object,
+      default: () => {},
+      require: true
+    }
+  },
   data() {
-    return {
-      quantity: 0
-    };
+    return { quantity: 0 };
   },
   computed: {
     disableButton: function() {
@@ -38,14 +42,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["buy"]),
     buyStock() {
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
         quantity: this.quantity
       };
-      this.buy(order);
+      this.$store.dispatch("buyStock", order);
       this.quantity = 0;
     }
   }
