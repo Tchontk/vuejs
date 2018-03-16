@@ -15,15 +15,13 @@ export default {
       portfolio: []
     };
   },
-  methods: {
-    created() {
-      const customActions = {
-        savePortfolion: { method: "POST", url: "portfolio.json" },
-        getStocks: { method: "GET", url: "stocks.json" }
-      };
-      this.resource = this.$resource("{node}.json", {}, customActions);
-      this.$store.dispatch("initStocks");
-    }
+  created() {
+    const customActions = {
+      savePortfolion: { method: "POST", url: "portfolio.json" },
+      getStocks: { method: "GET", url: "stocks.json" }
+    };
+    this.resource = this.$resource("{node}.json", {}, customActions);
+    this.$store.dispatch("initStocks");
   }
 };
 </script>
