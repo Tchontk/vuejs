@@ -35,7 +35,7 @@
                 </li>
               </ul>
             </li>
-            <p class="navbar-text">Funds: {{ portfolio.funds }}$</p>
+            <!-- <p class="navbar-text">Funds: {{ portfolio.funds }}$</p> -->
           </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -46,10 +46,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-export default {
-  computed: mapGetters(["portfolio"])
-};
 </script>
 
 <style>

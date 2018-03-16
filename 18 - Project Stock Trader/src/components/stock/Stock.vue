@@ -28,7 +28,7 @@ export default {
   props: ["stock"],
   data() {
     return {
-      quantity: -1
+      quantity: 0
     };
   },
   computed: {

@@ -22,6 +22,7 @@ export default {
         getStocks: { method: "GET", url: "stocks.json" }
       };
       this.resource = this.$resource("{node}.json", {}, customActions);
+      this.$store.dispatch("initStocks");
     }
   }
 };

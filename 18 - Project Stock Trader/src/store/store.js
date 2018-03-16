@@ -6,8 +6,8 @@ import stocks from './modules/stocks'
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-    modules: {
-        portfolio,
-        stocks
-    }
+  modules: {
+    portfolio,
+    stocks
+  }
 })
