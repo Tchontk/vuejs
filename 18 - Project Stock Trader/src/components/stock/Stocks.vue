@@ -13,7 +13,9 @@ export default {
   components: {
     appStock: Stock
   },
-  computed: mapGetters(["stocks"])
+  computed: {
+    ...mapGetters(["stocks"])
+  }
 };
 </script>
 
