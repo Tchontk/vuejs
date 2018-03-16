@@ -1,21 +1,9 @@
 import stocks from '../../data/data'
-const state = { stocks }
+const state = {}
 
 const getters = {
-  stocks: state => {
+  stocks: (state) => {
     return state.stocks;
-  }
-}
-
-const actions = {
-  buyStock: ({ commit }, order) => {
-    commit()
-  },
-  initTocks: ({ commit }) => {
-    commit('SET_STOCKS', stocks)
-  },
-  randomizeStocks: ({ commit }) => {
-    commit('RND_STOCKS')
   }
 }
 
@@ -33,6 +21,18 @@ const mutations = {
       state.portfolio[foundIndex].quantity += payload.quantity
     }
     state.funds -= payload.quantity * payload.price
+  }
+}
+
+const actions = {
+  buyStock: ({ commit }, order) => {
+    commit()
+  },
+  initStocks: ({ commit }) => {
+    commit('SET_STOCKS', stocks)
+  },
+  randomizeStocks: ({ commit }) => {
+    commit('RND_STOCKS')
   }
 }
 
