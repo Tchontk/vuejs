@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="list-group">
-      <app-stock v-for="(item, index) in portfolio" :key="index" :item="item" />
+      <app-stock v-for="stock in stockPortfolio" :key="stock.id" :stock="stock" />
     </ul>
   </div>
 </template>
