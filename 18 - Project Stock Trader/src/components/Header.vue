@@ -35,7 +35,7 @@
                 </li>
               </ul>
             </li>
-            <!-- <p class="navbar-text">Funds: {{ portfolio.funds }}$</p> -->
+            <p class="navbar-text">Funds: {{ funds }}$</p>
           </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -46,6 +46,13 @@
 </template>
 
 <script>
+export default {
+  computed: {
+    funds() {
+      return this.$store.getters.fundsString;
+    }
+  }
+};
 </script>
 
 <style>
