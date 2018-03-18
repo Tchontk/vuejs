@@ -39,7 +39,7 @@ export default {
     funds() {
       return this.$store.getters.funds;
     },
-    disableButton: function() {
+    disableButton() {
       let quantity = parseFloat(this.quantity);
       return quantity <= 0 || !Number.isInteger(quantity);
     },
