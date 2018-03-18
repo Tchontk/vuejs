@@ -1,8 +1,10 @@
 import stocks from '../../data/data'
-const state = {}
+const state = {
+  stocks: []
+}
 
 const getters = {
-  stocks: (state) => {
+  stocks: state => {
     return state.stocks;
   }
 }
@@ -11,16 +13,10 @@ const mutations = {
   'SET_STOCKS' (state, stocks) {
     state.stocks = stocks;
   },
-  'RND_STOCKS' (state) {},
-  buyStock: (state, payload) => {
-    let foundIndex = state.portfolio.findIndex(x => x.brand ==
-      payload.brand);
-    if (foundIndex === -1) {
-      state.portfolio.push(payload)
-    } else {
-      state.portfolio[foundIndex].quantity += payload.quantity
-    }
-    state.funds -= payload.quantity * payload.price
+  'RND_STOCKS' (state) {
+    state.stocks.forEach(stock => {
+      stock.price = Math.round(stock.price * (1 + Math.random() - 0.5))
+    });
   }
 }
 
