@@ -1,16 +1,19 @@
 const state = {
-  funds: 1000,
+  funds: 10000,
   stocks: []
 }
 
 const getters = {
+  funds: (state) => {
+    return state.funds
+  },
   stockPortfolio: (state, getters) => {
     return state.stocks.map(stock => {
       const record = getters.stocks.find(element => element.id == stock.id)
       return {
         id: stock.id,
         quantity: stock.quantity,
-        name: record.name,
+        brand: record.brand,
         price: record.price,
       }
     })
