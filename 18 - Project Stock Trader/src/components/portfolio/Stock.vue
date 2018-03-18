@@ -5,7 +5,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3>{{ stock.brand }}
-              <small>(price : {{ stock.price }})</small>
+              <small>(price : {{ stock.price }} - Quantity {{ stock.quantity }})</small>
             </h3>
           </div>
           <div class="quote panel-body">
