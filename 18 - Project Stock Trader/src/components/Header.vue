@@ -28,7 +28,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li class="dropdown">
-                  <a href="#">Save Data</a>
+                  <a href="#" @click="saveData">Save Data</a>
                 </li>
                 <li class="dropdown">
                   <a href="#">Load Data</a>
@@ -58,11 +58,27 @@ export default {
       return this.$store.getters.funds;
     }
   },
+  created() {
+    const customActions = {
+      saveData: { method: "POST", url: "state.json" }
+      // getData: { method: "GET" }
+    };
+    this.resource = this.$resource("{node}.json", {}, customActions);
+  },
   methods: {
     ...mapActions(["randomizeStocks"]),
     endDay() {
       this.randomizeStocks();
-    }
+    },
+    saveData() {
+      const data = {
+        stocks: this.$store.getters.stocks,
+        stockPortfolio: this.$store.getters.stockPortfolio,
+        funds: this.$store.getters.funds
+      };
+      this.resource.saveData(data);
+    },
+    loadData() {}
   }
 };
 </script>
