@@ -10,10 +10,11 @@
           </div>
           <div class="quote panel-body">
             <div class="pull-left">
-              <input type="number" id="quantity" class="form-control" placeholder="Quantity" v-model="quantity">
+              <input :class="{danger : insufficientFunds}" type="number" id="quantity" class="form-control" placeholder="Quantity" v-model="quantity">
             </div>
             <div class="pull-right">
-              <button class="btn btn-succes" :disabled="disableButton" @click.prevent="buyStock()">Buy</button>
+              <button class="btn btn-succes" :disabled="disableButton || insufficientFunds" @click.prevent="buyStock()">
+              {{ insufficientFunds ? 'Insufficient Funds' : 'Buy' }}</button>
             </div>
           </div>
         </div>
@@ -35,9 +36,15 @@ export default {
     return { quantity: 0 };
   },
   computed: {
+    funds() {
+      return this.$store.getters.funds;
+    },
     disableButton: function() {
       let quantity = parseFloat(this.quantity);
       return quantity <= 0 || !Number.isInteger(quantity);
+    },
+    insufficientFunds() {
+      return this.quantity * this.stock.price > this.funds;
     }
   },
   methods: {
@@ -54,6 +61,10 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+.danger {
+  border: 1px solid red;
+}
 </style>
+
+
