@@ -10,7 +10,7 @@
           </div>
           <div class="quote panel-body">
             <div class="pull-left">
-              <input :class="{danger : insufficientQuantity}" type="number" id="quantity" class="form-control" placeholder="Quantity" v-model="quantity">
+              <input :class="{danger : insufficientQuantity}" type="number" id="quantity" class="form-control" placeholder="Quantity" v-model.number="quantity">
             </div>
             <div class="pull-right">
               <button class="btn btn-succes" :disabled="insufficientQuantity || disableButton" @click.prevent="sellStock()">
@@ -38,8 +38,7 @@ export default {
   },
   computed: {
     disableButton() {
-      let quantity = parseFloat(this.quantity);
-      return quantity <= 0 || !Number.isInteger(quantity);
+      return this.quantity <= 0 || !Number.isInteger(this.quantity);
     },
     insufficientQuantity() {
       return this.quantity > this.stock.quantity;
