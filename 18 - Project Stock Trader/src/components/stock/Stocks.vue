@@ -7,14 +7,17 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
 import Stock from "./Stock.vue";
 export default {
   components: {
     appStock: Stock
   },
   computed: {
-    ...mapGetters(["stocks"])
+    stocks() {
+      return this.$store.getters.stocks;
+    }
+    // ...mapGetters(["stocks"])
   }
 };
 </script>
