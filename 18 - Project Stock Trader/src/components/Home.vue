@@ -4,7 +4,7 @@
     <h6>You may Save & Load your Data</h6>
     <h6>Click on End Day to begin a new Day !</h6>
     <hr>
-    <p>Your funds: {{ funds }}</p>
+    <p>Your funds: {{ funds | currency }}</p>
   </div>
 </template>
 
@@ -13,7 +13,7 @@
 export default {
   computed: {
     funds() {
-      return this.$store.getters.fundsString;
+      return this.$store.getters.funds;
     }
   }
 };

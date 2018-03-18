@@ -8,6 +8,10 @@ import { store } from './store/store'
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
+Vue.filter('currency', (value) => {
+  return value.toLocaleString() + '€'
+})
+
 Vue.http.options.root = 'https://vuejs-http-10974.firebaseio.com/'
 Vue.http.interceptors.push((request, next) => {
   if (request.method == 'POST') {

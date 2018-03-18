@@ -17,10 +17,6 @@ const getters = {
         price: record.price,
       }
     })
-  },
-  fundsString: state => {
-    let val = (state.funds / 1).toFixed(2).replace('.', ',')
-    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }
 }
 
