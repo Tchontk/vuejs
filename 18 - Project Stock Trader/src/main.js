@@ -13,18 +13,6 @@ Vue.filter('currency', (value) => {
 })
 
 Vue.http.options.root = 'https://vuejs-http-10974.firebaseio.com/'
-Vue.http.interceptors.push((request, next) => {
-  if (request.method == 'POST') {
-    request.method = 'PUT';
-  }
-  next(response => {
-    response.json = () => {
-      return {
-        messages: response.body
-      }
-    }
-  })
-})
 
 const router = new VueRouter({
   routes,
