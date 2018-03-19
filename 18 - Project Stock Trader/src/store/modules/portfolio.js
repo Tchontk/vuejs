@@ -21,6 +21,10 @@ const getters = {
 }
 
 const mutations = {
+  'SET_PORTFOLIO' (state, portfolio) {
+    state.funds = portfolio.funds
+    state.stocks = portfolio.stockPortfolio || [];
+  },
   'BUY_STOCK': (state, { stockId, quantity, stockPrice }) => {
     const record = state.stocks.find(element => element.id === stockId)
     if (record) {

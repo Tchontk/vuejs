@@ -31,7 +31,7 @@
                   <a href="#" @click="saveData">Save Data</a>
                 </li>
                 <li class="dropdown">
-                  <a href="#">Load Data</a>
+                  <a href="#" @click="loadData">Load Data</a>
                 </li>
               </ul>
             </li>
@@ -60,13 +60,17 @@ export default {
   },
   created() {
     const customActions = {
-      saveData: { method: "POST", url: "state.json" }
-      // getData: { method: "GET" }
+      saveData: { method: "POST", url: "state.json" },
+      getData: { method: "GET" }
     };
     this.resource = this.$resource("{node}.json", {}, customActions);
   },
   methods: {
-    ...mapActions(["randomizeStocks"]),
+    // ...mapActions(["randomizeStocks", "loadData"]),
+    ...mapActions({
+      randomizeStocks: "randomizeStocks",
+      fetchData: "loadData"
+    }),
     endDay() {
       this.randomizeStocks();
     },
@@ -76,9 +80,11 @@ export default {
         stockPortfolio: this.$store.getters.stockPortfolio,
         funds: this.$store.getters.funds
       };
-      this.resource.saveData(data);
+      this.$http.put("state.json", data);
     },
-    loadData() {}
+    loadData() {
+      this.fetchData();
+    }
   }
 };
 </script>
