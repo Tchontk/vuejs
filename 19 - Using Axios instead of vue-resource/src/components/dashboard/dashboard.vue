@@ -15,7 +15,7 @@ export default {
   },
   created() {
     axios
-      .get("https://vuejs-http-10974.firebaseio.com/users.json")
+      .get("/users.json")
       .then(response => {
         const data = response.data;
         const users = [];
