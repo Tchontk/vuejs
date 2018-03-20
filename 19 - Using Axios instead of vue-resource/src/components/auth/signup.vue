@@ -85,7 +85,6 @@ export default {
         hobbies: this.hobbyInputs.map(hobby => hobby.value),
         terms: this.terms
       };
-      console.log(formData);
       axios
         .post("https://vuejs-http-10974.firebaseio.com/users.json", formData)
         .then(response => console.log(response))
