@@ -24,9 +24,13 @@ export default new Vuex.Store({
           password: authData.password,
           returnSecureToken: true
         })
-        .then(response => console.log(response))
+        .then(response => {
+          commit('authUser', {
+            token: response.data.idToken,
+            userId: response.data.localId,
+          })
+        })
         .catch(error => console.log(error));
-      // commit('SIGNUP')
     },
     login({ commit }, authData) {
       axiosInstance
@@ -35,9 +39,15 @@ export default new Vuex.Store({
           password: authData.password,
           returnSecureToken: true
         })
-        .then(response => console.log(response))
+        .then(response => {
+          console.log(response.data.idToken);
+          console.log(response.data.localId);
+          commit('authUser', {
+            token: response.data.idToken,
+            userId: response.data.localId,
+          })
+        })
         .catch(error => console.log(error));
-      // commit('LOGIN')
     }
 
   },
