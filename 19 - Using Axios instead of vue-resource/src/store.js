@@ -46,9 +46,14 @@ export default new Vuex.Store({
             token: response.data.idToken,
             userId: response.data.localId,
           })
+          const now = new Date()
+          const expirationDate = new Date(now.getTime() + response.data.expiresIn * 1000)
+          localStorage.setItem('token', response.data.idToken)
+          localStorage.setItem('expirationDate', expirationDate)
+          localStorage.setItem('userId', response.data.localId)
           /** Dispatch ! */
           dispatch('storeUser', authData)
-          dispatch('setLogoutTimer', response.data.expiresIn)
+          // dispatch('setLogoutTimer', response.data.expiresIn)
         })
         .catch(error => console.log(error));
     },
@@ -64,7 +69,12 @@ export default new Vuex.Store({
             token: response.data.idToken,
             userId: response.data.localId,
           })
-          dispatch('setLogoutTimer', response.data.expiresIn)
+          const now = new Date()
+          const expirationDate = new Date(now.getTime() + response.data.expiresIn * 1000)
+          localStorage.setItem('token', response.data.idToken)
+          localStorage.setItem('expirationDate', expirationDate)
+          localStorage.setItem('userId', response.data.localId)
+          // dispatch('setLogoutTimer', response.data.expiresIn)
         })
         .catch(error => console.log(error));
     },
@@ -99,7 +109,23 @@ export default new Vuex.Store({
     },
     logout({ commit }) {
       commit('clearAuthData')
+      localStorage.removeItem('expirationDate')
+      localStorage.removeItem('token')
+      localStorage.removeItem('userId')
       router.push('/signin')
+    },
+    tryAutoLogin({ commit }) {
+      const token = localStorage.getItem('token')
+      if (!token) {
+        return
+      }
+      const expirationDate = localStorage.getItem('expirationDate')
+      const now = new Date()
+      if (now >= expirationDate) {
+        return
+      }
+      const userId = localStorage.getItem('userId')
+      commit('authUser', { token, userId })
     }
   },
   getters: {
