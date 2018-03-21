@@ -52,8 +52,6 @@
 
 <script>
 // import axios from "axios";
-import axiosInstance from "../../axios-auth";
-import API_KEY from "../../config";
 export default {
   data() {
     return {
@@ -87,14 +85,10 @@ export default {
         hobbies: this.hobbyInputs.map(hobby => hobby.value),
         terms: this.terms
       };
-      axiosInstance
-        .post("/signupNewUser?key=" + API_KEY, {
-          email: formData.email,
-          password: formData.password,
-          returnSecureToken: true
-        })
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
+      this.$store.dispatch("signup", {
+        email: formData.email,
+        password: formData.password
+      });
     }
   }
 };

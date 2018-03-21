@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import axiosInstance from "../../axios-auth";
-import API_KEY from "../../config";
 export default {
   data() {
     return {
@@ -34,14 +32,7 @@ export default {
         email: this.email,
         password: this.password
       };
-      axiosInstance
-        .post("/verifyPassword?key=" + API_KEY, {
-          email: formData.email,
-          password: formData.password,
-          returnSecureToken: true
-        })
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
+      this.$store.dispatch("login", formData);
     }
   }
 };
