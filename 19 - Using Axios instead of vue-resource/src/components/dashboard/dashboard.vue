@@ -8,14 +8,9 @@
 <script>
 import axios from "axios";
 export default {
-  data() {
-    return {
-      email: ""
-    };
-  },
   computed: {
     email() {
-      return this.$store.getters.user.email;
+      return !this.$store.getters.user ? false : this.$store.getters.user.email;
     }
   },
   created() {

@@ -18,7 +18,7 @@ export default new Vuex.Store({
       state.userId = userdata.userId
     },
     storeUser(state, userData) {
-      console.log(userData);
+      console.log('storeUser', userData);
       state.user = userData
     }
   },
@@ -55,16 +55,21 @@ export default new Vuex.Store({
         })
         .catch(error => console.log(error));
     },
-    storeUser({ commit }, userData) {
-      console.log('storeUser', userData);
+    storeUser({ commit, state }, userData) {
+      if (!state.idToken) {
+        return
+      }
       axios
-        .post("/users.json", userData)
+        .post("/users.json" + '?auth=' + state.idToken, userData)
         .then(response => console.log(response))
         .catch(error => console.log(error))
     },
-    fetchUser({ commit }) {
+    fetchUser({ commit, state }, userData) {
+      if (!state.idToken) {
+        return
+      }
       axios
-        .get("/users.json")
+        .get("/users.json" + '?auth=' + state.idToken)
         .then(response => {
           const data = response.data;
           const users = [];

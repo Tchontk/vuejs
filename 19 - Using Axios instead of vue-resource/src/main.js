@@ -11,16 +11,16 @@ axios.defaults.baseURL = "https://vuejs-http-10974.firebaseio.com"
 axios.defaults.headers.common['Accepts'] = 'application/json'
 
 // const requestInterceptor = axios.interceptors.request.use(config => {
-axios.interceptors.request.use(config => {
-  console.log('Request Interceptors : ', config);
-  return config
-})
+// axios.interceptors.request.use(config => {
+//   console.log('Request Interceptors : ', config);
+//   return config
+// })
 
-// const responseInterceptor = axios.interceptors.response.use(res => {
-axios.interceptors.response.use(res => {
-  console.log('Response Interceptors : ', res);
-  return res
-})
+// // const responseInterceptor = axios.interceptors.response.use(res => {
+// axios.interceptors.response.use(res => {
+//   console.log('Response Interceptors : ', res);
+//   return res
+// })
 
 // axios.interceptors.request.eject(requestInterceptor)
 // axios.interceptors.request.eject(responseInterceptor)
