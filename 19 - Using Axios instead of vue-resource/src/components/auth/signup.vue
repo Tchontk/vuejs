@@ -84,7 +84,16 @@ export default {
   validations: {
     email: {
       required,
-      email
+      email,
+      unique: val => {
+        if (val === "") return true;
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve(val !== "test@aze.aza");
+          }, 2000);
+        });
+        // return val !== "test@aze.aza";
+      }
     },
     age: {
       required,
