@@ -2,51 +2,53 @@
   <div id="signup">
     <div class="signup-form">
       <form @submit.prevent="onSubmit">
-        <div class="input" :class="{invalid: $v.email.$error} ">
-          <label for="email ">Mail</label>
-          <input type="email " id="email " @blur="$v.email.$touch() " v-model="email ">
+        <div class="input" :class="{invalid: $v.email.$error}">
+          <label for="email">Mail</label>
+          <input type="email" id="email" @blur="$v.email.$touch()" v-model="email">
           <p v-if="!$v.email.email">Please provide a valid email address.</p>
           <p v-if="!$v.email.required">This field must not be empty.</p>
-          <div>{{ $v }}</div>
+          <!-- <div>{{ $v }}</div> -->
         </div>
-        <div class="input ">
-          <label for="age ">Your Age</label>
-          <input type="number " id="age " v-model.number="age ">
+        <div class="input" :class="{invalid: $v.age.$error}">
+          <label for="age">Your Age</label>
+          <input type="number" id="age" v-model.number="age" @blur="$v.age.$touch()">
+          <p v-if="!$v.age.minVal">You have to be at least {{ $v.age.$params.minVal.min }} years old.</p>
         </div>
-        <div class="input ">
-          <label for="password ">Password</label>
-          <input type="password " id="password " v-model="password ">
+        <div class="input" :class="{invalid: $v.password.$error}">
+          <label for="password">Password</label>
+          <input type="password" id="password" v-model="password" @blur="$v.password.$touch()">
+          <div>{{ $v.password }}</div>
         </div>
-        <div class="input ">
-          <label for="confirm-password ">Confirm Password</label>
-          <input type="password " id="confirm-password " v-model="confirmPassword ">
+        <div class="input" :class="{invalid: $v.confirmPassword.$error}">
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" id="confirm-password" v-model="confirmPassword" @blur="$v.confirmPassword.$touch()">
         </div>
-        <div class="input ">
-          <label for="country ">Country</label>
-          <select id="country " v-model="country ">
-            <option value="usa ">USA</option>
-            <option value="india ">India</option>
-            <option value="uk ">UK</option>
-            <option value="germany ">Germany</option>
+        <div class="input">
+          <label for="country">Country</label>
+          <select id="country" v-model="country">
+            <option value="usa">USA</option>
+            <option value="india">India</option>
+            <option value="uk">UK</option>
+            <option value="germany">Germany</option>
           </select>
         </div>
-        <div class="hobbies ">
+        <div class="hobbies">
           <h3>Add some Hobbies</h3>
-          <button @click="onAddHobby " type="button ">Add Hobby</button>
-          <div class="hobby-list ">
-            <div class="input " v-for="(hobbyInput, index) in hobbyInputs " :key="hobbyInput.id ">
-              <label :for="hobbyInput.id ">Hobby #{{ index }}</label>
-              <input type="text " :id="hobbyInput.id " v-model="hobbyInput.value ">
-              <button @click="onDeleteHobby(hobbyInput.id) " type="button ">X</button>
+          <button @click="onAddHobby" type="button">Add Hobby</button>
+          <div class="hobby-list">
+            <div class="input" v-for="(hobbyInput, index) in hobbyInputs" :key="hobbyInput.id">
+              <label :for="hobbyInput.id">Hobby #{{ index }}</label>
+              <input type="text" :id="hobbyInput.id" v-model="hobbyInput.value">
+              <button @click="onDeleteHobby(hobbyInput.id)" type="button">X</button>
             </div>
           </div>
         </div>
-        <div class="input inline ">
-          <input type="checkbox " id="terms " v-model="terms ">
-          <label for="terms ">Accept Terms of Use</label>
+        <div class="input inline">
+          <input type="checkbox" id="terms" v-model="terms">
+          <label for="terms">Accept Terms of Use</label>
         </div>
-        <div class="submit ">
-          <button type="submit ">Submit</button>
+        <div class="submit">
+          <button type="submit">Submit</button>
         </div>
       </form>
     </div>
@@ -54,8 +56,16 @@
 </template>
 
 <script>
-import { required, email } from "vuelidate/lib/validators";
-// import axios from "axios";
+import {
+  required,
+  email,
+  numeric,
+  minValue,
+  minLength,
+  sameAs
+} from "vuelidate/lib/validators";
+
+// import axios from"axios";
 export default {
   data() {
     return {
@@ -72,6 +82,21 @@ export default {
     email: {
       required,
       email
+    },
+    age: {
+      required,
+      numeric,
+      minVal: minValue(18)
+    },
+    password: {
+      required,
+      minLen: minLength(8)
+    },
+    confirmPassword: {
+      sameAs: sameAs("password")
+      // sameAs: sameAs(vm => {
+      //   return vm.password + "b";
+      // })
     }
   },
   methods: {
