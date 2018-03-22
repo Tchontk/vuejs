@@ -17,7 +17,6 @@
         <div class="input" :class="{invalid: $v.password.$error}">
           <label for="password">Password</label>
           <input type="password" id="password" v-model="password" @blur="$v.password.$touch()">
-          <div>{{ $v.password }}</div>
         </div>
         <div class="input" :class="{invalid: $v.confirmPassword.$error}">
           <label for="confirm-password">Confirm Password</label>
@@ -36,15 +35,18 @@
           <h3>Add some Hobbies</h3>
           <button @click="onAddHobby" type="button">Add Hobby</button>
           <div class="hobby-list">
-            <div class="input" v-for="(hobbyInput, index) in hobbyInputs" :key="hobbyInput.id">
+            <div class="input" v-for="(hobbyInput, index) in hobbyInputs" :key="hobbyInput.id" :class="{invalid: $v.hobbyInputs.$each[index].value.$error}">
               <label :for="hobbyInput.id">Hobby #{{ index }}</label>
-              <input type="text" :id="hobbyInput.id" v-model="hobbyInput.value">
+              <input type="text" :id="hobbyInput.id" v-model="hobbyInput.value" @blur="$v.hobbyInputs.$each[index].value.$touch()">
               <button @click="onDeleteHobby(hobbyInput.id)" type="button">X</button>
             </div>
+            <p v-if="!$v.hobbyInputs.minLen">You have to specify at least {{ $v.hobbyInputs.$params.minLen.min }} hobbies.</p>
+            <p v-if="!$v.hobbyInputs.required">Please add hobbies.</p>
+            <!-- <div>{{ $v.hobbyInputs }}</div> -->
           </div>
         </div>
-        <div class="input inline">
-          <input type="checkbox" id="terms" v-model="terms">
+        <div class="input inline" :class="{invalid: $v.terms.$invalid}">
+          <input type="checkbox" id="terms" v-model="terms" @change="$v.terms.$touch()">
           <label for="terms">Accept Terms of Use</label>
         </div>
         <div class="submit">
@@ -62,7 +64,8 @@ import {
   numeric,
   minValue,
   minLength,
-  sameAs
+  sameAs,
+  requiredUnless
 } from "vuelidate/lib/validators";
 
 // import axios from"axios";
@@ -97,6 +100,21 @@ export default {
       // sameAs: sameAs(vm => {
       //   return vm.password + "b";
       // })
+    },
+    terms: {
+      required: requiredUnless(vm => {
+        return vm.country === "germany";
+      })
+    },
+    hobbyInputs: {
+      required,
+      minLen: minLength(2),
+      $each: {
+        value: {
+          required,
+          minLen: minLength(5)
+        }
+      }
     }
   },
   methods: {
