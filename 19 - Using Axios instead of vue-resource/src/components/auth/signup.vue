@@ -2,48 +2,51 @@
   <div id="signup">
     <div class="signup-form">
       <form @submit.prevent="onSubmit">
-        <div class="input">
-          <label for="email">Mail</label>
-          <input type="email" id="email" v-model="email">
+        <div class="input" :class="{invalid: $v.email.$error} ">
+          <label for="email ">Mail</label>
+          <input type="email " id="email " @input="$v.email.$touch() " v-model="email ">
+          <p v-if="!$v.email.email">Please provide a valid email address.</p>
+          <p v-if="!$v.email.required">This field must not be empty.</p>
+          <div>{{ $v }}</div>
         </div>
-        <div class="input">
-          <label for="age">Your Age</label>
-          <input type="number" id="age" v-model.number="age">
+        <div class="input ">
+          <label for="age ">Your Age</label>
+          <input type="number " id="age " v-model.number="age ">
         </div>
-        <div class="input">
-          <label for="password">Password</label>
-          <input type="password" id="password" v-model="password">
+        <div class="input ">
+          <label for="password ">Password</label>
+          <input type="password " id="password " v-model="password ">
         </div>
-        <div class="input">
-          <label for="confirm-password">Confirm Password</label>
-          <input type="password" id="confirm-password" v-model="confirmPassword">
+        <div class="input ">
+          <label for="confirm-password ">Confirm Password</label>
+          <input type="password " id="confirm-password " v-model="confirmPassword ">
         </div>
-        <div class="input">
-          <label for="country">Country</label>
-          <select id="country" v-model="country">
-            <option value="usa">USA</option>
-            <option value="india">India</option>
-            <option value="uk">UK</option>
-            <option value="germany">Germany</option>
+        <div class="input ">
+          <label for="country ">Country</label>
+          <select id="country " v-model="country ">
+            <option value="usa ">USA</option>
+            <option value="india ">India</option>
+            <option value="uk ">UK</option>
+            <option value="germany ">Germany</option>
           </select>
         </div>
-        <div class="hobbies">
+        <div class="hobbies ">
           <h3>Add some Hobbies</h3>
-          <button @click="onAddHobby" type="button">Add Hobby</button>
-          <div class="hobby-list">
-            <div class="input" v-for="(hobbyInput, index) in hobbyInputs" :key="hobbyInput.id">
-              <label :for="hobbyInput.id">Hobby #{{ index }}</label>
-              <input type="text" :id="hobbyInput.id" v-model="hobbyInput.value">
-              <button @click="onDeleteHobby(hobbyInput.id)" type="button">X</button>
+          <button @click="onAddHobby " type="button ">Add Hobby</button>
+          <div class="hobby-list ">
+            <div class="input " v-for="(hobbyInput, index) in hobbyInputs " :key="hobbyInput.id ">
+              <label :for="hobbyInput.id ">Hobby #{{ index }}</label>
+              <input type="text " :id="hobbyInput.id " v-model="hobbyInput.value ">
+              <button @click="onDeleteHobby(hobbyInput.id) " type="button ">X</button>
             </div>
           </div>
         </div>
-        <div class="input inline">
-          <input type="checkbox" id="terms" v-model="terms">
-          <label for="terms">Accept Terms of Use</label>
+        <div class="input inline ">
+          <input type="checkbox " id="terms " v-model="terms ">
+          <label for="terms ">Accept Terms of Use</label>
         </div>
-        <div class="submit">
-          <button type="submit">Submit</button>
+        <div class="submit ">
+          <button type="submit ">Submit</button>
         </div>
       </form>
     </div>
@@ -51,6 +54,7 @@
 </template>
 
 <script>
+import { required, email } from "vuelidate/lib/validators";
 // import axios from "axios";
 export default {
   data() {
@@ -63,6 +67,12 @@ export default {
       hobbyInputs: [],
       terms: false
     };
+  },
+  validations: {
+    email: {
+      required,
+      email
+    }
   },
   methods: {
     onAddHobby() {
@@ -135,6 +145,15 @@ export default {
 .input select {
   border: 1px solid #ccc;
   font: inherit;
+}
+
+.input.invalid input {
+  border: 1px solid red;
+  background-color: #ffc9aa;
+}
+
+.input.invalid label {
+  color: red;
 }
 
 .hobbies button {
