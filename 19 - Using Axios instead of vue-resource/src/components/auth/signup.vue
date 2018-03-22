@@ -84,10 +84,7 @@ export default {
   validations: {
     email: {
       required,
-      email,
-      unique: val => {
-        return val !== "test@aze.aza";
-      }
+      email
     },
     age: {
       required,
