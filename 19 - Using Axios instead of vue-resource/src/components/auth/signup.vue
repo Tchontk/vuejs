@@ -50,7 +50,7 @@
           <label for="terms">Accept Terms of Use</label>
         </div>
         <div class="submit">
-          <button type="submit">Submit</button>
+          <button type="submit" :disabled="$v.$invalid">Submit</button>
         </div>
       </form>
     </div>
@@ -84,7 +84,10 @@ export default {
   validations: {
     email: {
       required,
-      email
+      email,
+      unique: val => {
+        return val !== "test@aze.aza";
+      }
     },
     age: {
       required,
