@@ -68,7 +68,7 @@ import {
   requiredUnless
 } from "vuelidate/lib/validators";
 
-// import axios from"axios";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -87,12 +87,19 @@ export default {
       email,
       unique: val => {
         if (val === "") return true;
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            resolve(val !== "test@aze.aza");
-          }, 2000);
-        });
+        // return new Promise((resolve, reject) => {
+        //   setTimeout(() => {
+        //     resolve(val !== "test@aze.aza");
+        //   }, 2000);
+        // });
         // return val !== "test@aze.aza";
+        return axios
+          .get('/users.json?orderBy="email"&equalTo="' + val + '"')
+          .then(res => {
+            console.log(res.data);
+            console.log(Object.keys(res.data));
+            return Object.keys(res.data).length === 0;
+          });
       }
     },
     age: {
